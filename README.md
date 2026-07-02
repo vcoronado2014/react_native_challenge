@@ -29,7 +29,8 @@ Para el desarrollo de este ecosistema, se optó conscientemente por utilizar **R
    cd PocketDex
 
 ### Instalar dependencias
-```npm install
+```bash
+npm install
 
 ### Dependencias adicionales añadidas
 Si bien la premisa era NO instalar dependencias adicionales, fué necesario para el manejo de test, storage
