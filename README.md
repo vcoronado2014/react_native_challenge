@@ -26,33 +26,43 @@ Para el desarrollo de este ecosistema, se optó conscientemente por utilizar **R
 ### Instrucciones de Configuración
 1. **Clonar o navegar al directorio del proyecto:**
    ```bash
-   cd PocketDex
+   cd PocketDex ```
 
 ### Instalar dependencias
 ```bash
-npm install
+npm install ```
 
 ### Dependencias adicionales añadidas
 Si bien la premisa era NO instalar dependencias adicionales, fué necesario para el manejo de test, storage
  y persistencia de datos las siguientes librerias adicionales
 
 # Almacenamiento local físico nativo
-```npm install @react-native-async-storage/async-storage
+```bash
+npm install @react-native-async-storage/async-storage 
+```
 
 # Preset para la suite de pruebas unitarias de Jest
-```npm install --save-dev @react-native-jest-preset
+```bash
+npm install --save-dev @react-native-jest-preset
+```
 
 # Iniciar metro de ser necesario
-```npm start
+```bash
+npm start
+```
 
 # Lanzar la aplicacion en el emulador de android
 Idealmente este emulador debe estar corriendo en el PC para evitar dificultades de sincronización, o bien 
  debe haber un dispositivo físico conectado mediante cable al PC
 
-```npm run android
+```bash
+npm run android
+```
 
 # Pruebas unitarias
-```npm test
+```bash
+npm test
+```
 
 # Arquitectura y otras decisiones técnicas
 La base de código sigue estrictamente los principios de Arquitectura Limpia (Clean Architecture) y SOLID para garantizar el desacoplamiento, la testabilidad y la mantenibilidad a largo plazo.
@@ -68,7 +78,9 @@ La base de código sigue estrictamente los principios de Arquitectura Limpia (Cl
 * Entidad limpia y modelo fuertemente tipado
 * Accesibilidad donde se incluye flujos de lectores de pantalla y asistencia visual
 * Conjunto de reglas preconfiguradas mediante Prettier y EsLint para patrones de análisis estático (linting y formateo)
-    ```npm run lint
+    ```bash
+    npm run lint
+    ```
 
 # Mejoras futuras
 * Quizás se podría hacer un caché dinámico  de imágenes, ya que las imagenes dependen del caché de red
