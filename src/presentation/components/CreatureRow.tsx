@@ -32,7 +32,7 @@ export const CreatureRow = React.memo(({ item, onPress }: Props) => {
         <Text style={styles.name}>{item.name}</Text>
       </View>
       {/* Ocultamos la flecha decorativa para el lector de pantalla para evitar ruido */}
-      <Text style={styles.arrow} importantForAccessibility="no">></Text>
+      <Text style={styles.arrow} importantForAccessibility="no">&gt;</Text>
     </TouchableOpacity>
   );
 });
