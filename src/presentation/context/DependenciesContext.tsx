@@ -6,6 +6,9 @@ import { CreatureRemoteDataSource } from '../../data/datasources/CreatureRemoteD
 import { CreatureRepositoryImpl } from '../../data/repositories/CreatureRepositoryImpl';
 import { GetCreatureList } from '../../domain/usecases/GetCreatureList';
 import { GetCreatureDetails } from '../../domain/usecases/GetCreatureDetails';
+import { EsFavorito } from '../../domain/usecases/EsFavorito';
+import { AgregarFavorite } from '../../domain/usecases/AgregarFavorito';
+
 
 interface NavigationState {
   currentScreen: AppStack;
@@ -16,11 +19,15 @@ interface NavigationState {
 interface Dependencies extends NavigationState {
   getCreatureList: GetCreatureList;
   getCreatureDetails: GetCreatureDetails;
+  agregarFavorito: AgregarFavorite;
+  esFavorito: EsFavorito;
 }
 
 const DependenciesContext = createContext<Dependencies | null>(null);
 
 export const DependenciesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+
+  
   const [nav, setNav] = useState<{ screen: AppStack; id: string | null }>({
     screen: 'FEED',
     id: null,
@@ -30,9 +37,12 @@ export const DependenciesProvider: React.FC<{ children: React.ReactNode }> = ({ 
     const remoteDS = new CreatureRemoteDataSource();
     const repo = new CreatureRepositoryImpl(remoteDS);
 
+
     return {
       getCreatureList: new GetCreatureList(repo),
       getCreatureDetails: new GetCreatureDetails(repo),
+      agregarFavorito: new AgregarFavorite(repo),
+      esFavorito: new EsFavorito(repo),
       currentScreen: nav.screen,
       selectedId: nav.id,
       navigate: (screen: AppStack, id?: string) => setNav({ screen, id: id || null }),

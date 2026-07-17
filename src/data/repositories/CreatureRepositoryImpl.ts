@@ -7,6 +7,7 @@ export class CreatureRepositoryImpl implements CreatureRepository {
   private memoryCache = new Map<string, any>();
   private readonly LIST_CACHE_KEY = '@pocket_dex_list_page_';
   private readonly DETAIL_CACHE_KEY = '@pocket_dex_detail_';
+  private readonly FAVORITE_KEY = 'pockemon_favorite_cache';
 
   constructor(private remoteDataSource: CreatureRemoteDataSource) {}
 
@@ -99,4 +100,43 @@ export class CreatureRepositoryImpl implements CreatureRepository {
 
     return detail;
   }
+
+  //es favorito o no
+  async esFavorito(id: string): Promise<boolean>{
+    try {
+      const favStr = await AsyncStorage.getItem(this.FAVORITE_KEY);
+      if (!favStr) return false;
+
+      const favorites: string[] = JSON.parse(favStr);
+      return favorites.includes(id);
+
+    }
+    catch {
+      return false;
+    }
+  }
+
+  //agregar a favorito
+  async agregarFavoritos(id: string): Promise<boolean>{
+    //lo dejare sin try por mientras
+    const favStr = await AsyncStorage.getItem(this.FAVORITE_KEY);
+
+    let favorites: string[] = favStr ? JSON.parse(favStr) : [];
+    //indice
+    const index = favorites.indexOf(id);
+    let esFav = false;
+    if (index > -1){
+      favorites.splice(index, 1); //ya era favorito, asi qe lo movemos
+    }
+    else {
+      favorites.push(id);
+      esFav = true;
+    }
+
+    //seteamos
+    await AsyncStorage.setItem(this.FAVORITE_KEY, JSON.stringify(favorites));
+
+    return esFav;
+  }
+
 }
